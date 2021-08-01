@@ -1,0 +1,14 @@
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    z-index: 1  ;
+}
+.mycontainer{ 
+    height: 400px
+}
+.up{ 
+    margin-top  : 50px
+}
