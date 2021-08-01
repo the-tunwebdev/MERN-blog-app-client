@@ -20,7 +20,9 @@ function Nav() {
             const data =  await response.json()
             console.log(data)
             Cookies.remove('session')
-            window.location = '/'
+            Cookies.remove('token')
+
+            
 
         }catch(err){
             console.log(err)

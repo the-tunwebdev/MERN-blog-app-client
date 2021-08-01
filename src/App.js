@@ -11,6 +11,7 @@ import Register from './user/register/register';
 import * as Cookies from "js-cookie";
 import UserBlog from "./Blog/UserBlog/UserBlog";
 import EditBlog from "./Blog/UserBlog/EditBlog";
+import PageNotFound from "./PageNotFound/PageNotFound"
 function App() {
   return (
    
@@ -23,7 +24,8 @@ function App() {
           <Route path="/confirmation/:id" component={Confirmation} />
           <Route path="/" exact component={HomePage} />
           {
-            Cookies.get('token') ? <div>
+            Cookies.get('token') ? 
+            <div>
               <Route path = '/addblog' component={AddBlog} />
               <Route path = '/blog/:id' component={StrangerUserBlog} />
               <Route path = '/edit/:id' component={EditBlog} />
@@ -31,8 +33,9 @@ function App() {
               <Route path = '/favblog' component={FavBlog} />
 
               <Route path = '/me' component={UserBlog} />
+              </div>
 
-            </div> : null
+            : <PageNotFound />
           }
           
 

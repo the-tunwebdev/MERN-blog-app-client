@@ -10,7 +10,7 @@ function Post({title,imageURL,description,owner,removeFav}) {
     return (
         <div className="max-w-sm rounded overflow-hidden shadow-lg  "style={{margin : "20px",zIndex : "20"}}>
                         
-                {imageURL ==='' ? null :<img className="w-full" src={imageURL}  style={{"height" : "40%"}} /> }
+                {imageURL ==='' ? <div style={{height : "40%"}}></div> :<img className="w-full" src={imageURL}  style={{"height" : "40%"}} /> }
                 <div className="px-6 py-4">
                     <div className="font-bold text-xl mb-2 text-center" style={{"height" : "20%"}}>{title}</div>
                     <p className="text-gray-700 text-base" style={{"height" : "45%"}}>

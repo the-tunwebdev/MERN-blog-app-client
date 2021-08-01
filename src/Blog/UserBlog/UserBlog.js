@@ -17,9 +17,14 @@ function UserBlog() {
               
             });
             const data = await response.json()
-            console.log(data)
-            setposts(data)
-            setloader(true)
+            if(data.error){
+                return document.getElementById('err').textContent =  'please authenticate'
+            }else{
+                setposts(data)
+
+            }
+            
+            
             
             
 
@@ -53,15 +58,22 @@ function UserBlog() {
     },[])
     return (
         <div className='flex justify-center flex-wrap space-x-6 content-start  ' >
+            <p id= 'err'></p>
+           
+                <div>
+                    {
+                        posts.length === 0 && document.getElementById('err') === null ? <h1>you didnt post nothing</h1>  : 
+                        
+                            posts.map((post)=>(
+                                    <Blog title={post.title} description={post.description} imageURL={post.imageURL} removePost={() =>removePost(post._id)} _id={post._id} />
+                            )) 
+                        
+                    }
+                </div>
+
             
-                {
-                    posts.length === 0 ? <h1>you didnt post nothing</h1>  : 
-                    
-                        posts.map((post)=>(
-                                <Blog title={post.title} description={post.description} imageURL={post.imageURL} removePost={() =>removePost(post._id)} _id={post._id} />
-                        )) 
-                    
-                }
+            
+                
                 
             
         </div>

@@ -31,7 +31,7 @@ function HomePage() {
            
             {loader ?
                 posts.map((post)=>(
-                    <Post title={post.title} description={post.description} imageURL={post.imageURL} owner={post.owner}  />
+                    <Post title={post.title} description={post.description} imageURL={post.imageURL} owner={post.owner} _id={post._id}  />
                 )) : 
                 <div className='lds-roller'></div>
                 
