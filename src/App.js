@@ -12,6 +12,9 @@ import * as Cookies from "js-cookie";
 import UserBlog from "./Blog/UserBlog/UserBlog";
 import EditBlog from "./Blog/UserBlog/EditBlog";
 import PageNotFound from "./PageNotFound/PageNotFound"
+import EmailSend from "./ForgetPassword/EmailSend";
+import ResetPassword from "./ForgetPassword/ResetPassword";
+
 function App() {
   return (
    
@@ -20,6 +23,10 @@ function App() {
         <Nav />
         <Switch>
           <Route path="/login" component={Login} />
+          <Route path="/forget" component={EmailSend} />
+          <Route path="/resetpass/:id" component={ResetPassword} />
+
+
           <Route path="/register" component={Register} />
           <Route path="/confirmation/:id" component={Confirmation} />
           <Route path="/" exact component={HomePage} />

@@ -7,7 +7,7 @@ function StrangerUserBlog() {
     const path  = window.location.pathname.split('/')
     const id = path[2]
     
-    const [isstrange,setstrange] =  useState(true)
+        const [isstrange,setstrange] =  useState(true)
     console.log(posts)
     const getStrangeUserPost= async() =>{
         try {

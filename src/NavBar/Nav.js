@@ -21,6 +21,7 @@ function Nav() {
             console.log(data)
             Cookies.remove('session')
             Cookies.remove('token')
+            window.location = '/'
 
             
 
@@ -31,12 +32,12 @@ function Nav() {
     
     return (
         <div>
-            <input type="checkbox" id="check"/>
+            <input type="checkbox" id="check" style={{top : "0"}}/>
             <label for="check" >
-                <i class="fas fa-bars" id="btn" style={{position: "fixed"}}></i>
+                <i class="fas fa-bars" id="btn" style={{position: "fixed" }}></i>
                 <i class="fas fa-times" id="cancel" style={{position: "fixed"}}></i>
             </label>
-            <div class="sidebar">
+            <div class="sidebar" style={{top : "0"}}>
                 <header>My App</header>
                 <ul>
                 <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
