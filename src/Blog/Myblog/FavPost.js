@@ -1,7 +1,7 @@
 import React from 'react'
 import * as Cookies from "js-cookie";
 function Post({title,imageURL,description,owner,removeFav}) {
-    const token =  Cookies.get("token")
+
     const ViewUserPost = ()=>{
         window.location = `/blog/${owner}`
     }
@@ -9,6 +9,7 @@ function Post({title,imageURL,description,owner,removeFav}) {
     
     return (
         <div className="max-w-sm rounded overflow-hidden shadow-lg  "style={{margin : "20px",zIndex : "20"}}>
+            
                         
                 {imageURL ==='' ? <div style={{height : "40%"}}></div> :<img className="w-full" src={imageURL}  style={{"height" : "40%"}} /> }
                 <div className="px-6 py-4">
@@ -23,7 +24,7 @@ function Post({title,imageURL,description,owner,removeFav}) {
                         <span className=" inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 " onClick={ViewUserPost} style={{cursor : "pointer",height : "10%"}} >#by{owner}</span>
                         
                             
-                        <i class="fa fa-trash" style={{cursor : "pointer",fontSize : "30px" }} onClick={removeFav} id='fav'></i>
+                        <i className="fa fa-trash" style={{cursor : "pointer",fontSize : "30px" }} onClick={removeFav} id='fav'></i>
                         
 
                         

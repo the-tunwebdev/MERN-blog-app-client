@@ -2,11 +2,8 @@ import React,{useState,useEffect} from 'react'
 import * as Cookies from "js-cookie";
 import '../../Home/loader.css'
 import FavPost from './FavPost'
-import PageNotFound from '../../PageNotFound/PageNotFound';
 function FavBlog() {
-    
     const token =  Cookies.get("token")
-    console.log(token)
     const [posts,Setpost] =  useState([])
     const [loader,setloader] =  useState(false)
     const getFavBlogs= async() =>{
@@ -23,14 +20,10 @@ function FavBlog() {
             })
             const data = await response.json();
             if(data.error){
-                
                 return  false
             }else{
                 Setpost(data)
                 setloader(true)
-                
-                console.log(data)
-
             }
             
         } catch (err) {
@@ -38,6 +31,7 @@ function FavBlog() {
         }
     }
     const removeFav = async(id)=>{
+        console.log(id)
         try {
             
             const deletePost = await fetch(`http://localhost:5000/favblog/${id}`, {

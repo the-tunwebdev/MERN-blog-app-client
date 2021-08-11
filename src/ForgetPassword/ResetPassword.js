@@ -14,7 +14,7 @@ function EmailSend() {
         if(data.err){
             seterror(data.err)
         }else{
-            console.log(data)
+           
         }
     }
     const updatePass  = async()=>{
@@ -42,18 +42,18 @@ function EmailSend() {
 
     
     return (
-        <div class='container center' >
+        <div className='container center' >
             
             <div className="w-full max-w-lg container " >
                 {error.length > 0 ? <h1 style={{color: 'red',textAlign: 'center'}}>wrong id</h1> :
                 
                     <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 ">
-                        <p class="text-base md:text-lg flex justify-center text-blue-600 font-bold  " style={{marginBottom: "10px"}}>Enter new password</p>
-                        <p class="text-base md:text-lg flex justify-center text-green-600   " id='info'></p>
+                        <p className="text-base md:text-lg flex justify-center text-blue-600 font-bold  " style={{marginBottom: "10px"}}>Enter new password</p>
+                        <p className="text-base md:text-lg flex justify-center text-green-600   " id='info'></p>
 
 
 
-                        <div class='up'>
+                        <div className='up'>
                             <div className="mb-4">
                                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
                                 New password

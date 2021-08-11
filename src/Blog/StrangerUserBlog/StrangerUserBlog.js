@@ -8,7 +8,7 @@ function StrangerUserBlog() {
     const id = path[2]
     
         const [isstrange,setstrange] =  useState(true)
-    console.log(posts)
+    
     const getStrangeUserPost= async() =>{
         try {
             
@@ -24,7 +24,7 @@ function StrangerUserBlog() {
                 
             })
             const data = await response.json();
-            console.log(data)
+            
             
             
             Setpost(data)

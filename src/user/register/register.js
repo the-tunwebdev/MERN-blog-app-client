@@ -43,14 +43,15 @@ function Register() {
         }
     }
     return (
-        <div class='container center '>
+        <div className='container center '>
+            
             <div className="w-full max-w-lg container ">
                 
                 <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mycontainer">
-                    <p class="text-base md:text-lg flex justify-center text-blue-600 font-bold ">Register here to create your account </p>
-                    <p class="text-base md:text-lg flex justify-center text-green-600 font-bold " id='checkemail'> </p>
+                    <p className="text-base md:text-lg flex justify-center text-blue-600 font-bold ">Register here to create your account </p>
+                    <p className="text-base md:text-lg flex justify-center text-green-600 font-bold " id='checkemail'> </p>
 
-                <div class='up'>
+                <div className='up'>
                     <div className="mb-2">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
                         name
@@ -81,6 +82,16 @@ function Register() {
                 <p className="text-center text-gray-500 text-xs">
                 ©blog app
                 </p>
+      </div>
+      
+      <div class="flex flex-wrap justify-center">
+       
+        <div class="w-full sm:w-1/2 sm:pl-2">
+          <button
+            class="w-full bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
+            type="button"
+          >Login with Google</button>
+        </div>
       </div>
             
         </div>

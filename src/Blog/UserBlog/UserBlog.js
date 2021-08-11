@@ -45,7 +45,7 @@ function UserBlog() {
               method: "DELETE"
             });
             const data = await deletePost.json()
-            console.log(data)
+            
       
             setposts(posts.filter(post => post._id !== id));
           } catch (err) {
@@ -60,7 +60,7 @@ function UserBlog() {
         <div className='flex justify-center flex-wrap space-x-6 content-start  ' >
             <p id= 'err'></p>
            
-                <div>
+                
                     {
                         posts.length === 0 && document.getElementById('err') === null ? <h1>you didnt post nothing</h1>  : 
                         
@@ -69,7 +69,7 @@ function UserBlog() {
                             )) 
                         
                     }
-                </div>
+                
 
             
             

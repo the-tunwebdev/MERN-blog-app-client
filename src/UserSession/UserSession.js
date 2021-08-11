@@ -2,7 +2,7 @@ const  UserSession = (function() {
     var full_name = "";
   
     var getName = function() {
-        console.log('hellox')
+        
        return full_name;    // Or pull this from cookie/localStorage
     };
   

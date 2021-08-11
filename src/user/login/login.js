@@ -20,15 +20,17 @@ function Login() {
                 body: JSON.stringify(body)
             })
             const data = await response.json()
-            console.log(data.user)
+            
             if(data.user){
                 document.getElementById('alert').style.color = 'green'
                 document.getElementById('alert').textContent =  `welcome ${data.user.name}`
                 
                 Cookies.set("session", data.user.name, { expires: 14 });
                 Cookies.set("token", data.token, { expires: 14 });
+                console.log(Cookies.get("token"))
                 Cookies.set("id", data.user._id, { expires: 14 });
                 window.location = '/'
+                
 
 
                 
@@ -53,14 +55,14 @@ function Login() {
 
     return (
         
-        <div class='container center '>
+        <div className='container center '>
             <div className="w-full max-w-lg container ">
                 <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mycontainer">
-                <p class="text-base md:text-lg flex justify-center text-blue-600 font-bold ">Login here to add your own blog</p>
-                <p class="text-base md:text-lg flex justify-center text-blue-600 font-bold " id='alert'></p>
+                <p className="text-base md:text-lg flex justify-center text-blue-600 font-bold ">Login here to add your own blog</p>
+                <p className="text-base md:text-lg flex justify-center text-blue-600 font-bold " id='alert'></p>
 
 
-                <div class='up'>
+                <div className='up'>
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
                         email

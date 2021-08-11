@@ -17,9 +17,9 @@ function Blog({title,imageURL,description,removePost,editPost,_id}) {
                    
                     <div className="px-6 pt-4 pb-2  flex space-x-8">
                         
-                        <button type="button" class="btn btn-warning" onClick={()=>sendtoedit(_id)}>Edit</button>
+                        <button type="button" className="btn btn-warning" onClick={()=>sendtoedit(_id)}>Edit</button>
                             
-                        <i class="fa fa-trash" style={{cursor : "pointer",fontSize : "30px",marginLeft : " auto"}} id='fav' onClick={removePost}></i>
+                        <i className="fa fa-trash" style={{cursor : "pointer",fontSize : "30px",marginLeft : " auto"}} id='fav' onClick={removePost}></i>
                         
                                 
                     </div>

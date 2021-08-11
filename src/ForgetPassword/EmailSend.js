@@ -19,18 +19,18 @@ function EmailSend() {
             document.getElementById('info').style.color =  'red'
 
         }
-        console.log(data)
+        
     }
     return (
-        <div class='container center ' >
+        <div className='container center ' >
             <div className="w-full max-w-lg container " >
                 <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 ">
-                <p class="text-base md:text-lg flex justify-center text-blue-600 font-bold  " style={{marginBottom: "10px"}}>Add your email address here</p>
-                <p class="text-base md:text-lg flex justify-center text-green-600   " id='info'>We will send you an email to change your password</p>
+                <p className="text-base md:text-lg flex justify-center text-blue-600 font-bold  " style={{marginBottom: "10px"}}>Add your email address here</p>
+                <p className="text-base md:text-lg flex justify-center text-green-600   " id='info'>We will send you an email to change your password</p>
 
 
 
-                <div class='up'>
+                <div className='up'>
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
                         email
