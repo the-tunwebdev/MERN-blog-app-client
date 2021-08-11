@@ -1,9 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import './Nav.css'
 import * as Cookies from "js-cookie";
+import {getUser} from '../redux/index'
+import {connect} from 'react-redux'
+function Nav(props) {
+    useEffect(()=>{
+        console.log(props.getUser())
 
-function Nav() {
+    },[])
     const logout  =  async ()=>{
+        
         try{
             const token =  Cookies.get("token")
 
@@ -51,7 +57,7 @@ function Nav() {
                 
                         
                         <li><a href="/me"><i className="fa fa-star"></i>My Blogs</a></li>
-                        <li><a href="/me"><i className="fa fa-user"></i>{Cookies.get('session')}</a></li>
+                        <li><a href="/me"><i className="fa fa-user"></i>{props.user}</a></li>
                         <li><a href="#" onClick={logout}><i className="fa fa-sign-out"></i>Logout</a></li>
                    </div>:
                    <div>
@@ -67,5 +73,14 @@ function Nav() {
         </div>
     )
 }
-
-export default Nav
+const mapStateToProps = state =>{
+    return{
+        user :  state.user
+    }
+}
+const mapDispatchToProps = dispatch =>{
+    return{
+        getUser :  ()=> dispatch(getUser())
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Nav)
