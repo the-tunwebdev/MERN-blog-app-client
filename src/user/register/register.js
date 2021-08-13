@@ -1,11 +1,39 @@
 import React, { useState } from 'react'
+import {GoogleLogin} from 'react-google-login';
 import './style.css'
+import axios from 'axios';
+import * as Cookies from "js-cookie";
 function Register() {
     // use State
     const [name,Setname] =  useState('')
     const [email,Setemail] =  useState('')
     const [password,Setpassword] =  useState('')
     // submit function
+    const responseSucess  =  async(response) => {
+        
+        const tokenId  =  response.tokenId
+        const res =  await fetch("http://localhost:5000/api/googlelogin", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({tokenId})
+        })
+        console.log('res ',res)
+        const data  =  await res.json()
+
+        console.log('data' , data)
+        console.log(response)
+        Cookies.set("session", response.Ss.Me, { expires: 14 });
+        Cookies.set("id", data._id, { expires: 14 });
+
+        Cookies.set("token", data.token, { expires: 14 });
+        window.location = '/'       
+        
+        
+
+    }
+    const responseFailure  =  (response) => {
+        console.log(response)
+    }
     const Addnewregister = async(e)=>{
         e.preventDefault();
         try{
@@ -84,7 +112,20 @@ function Register() {
                 </p>
       </div>
       
-     
+      <div class="flex flex-wrap justify-center">
+       
+        <div class="w-full sm:w-1/2 sm:pl-2">
+          
+          <GoogleLogin
+            
+            clientId=""
+            buttonText="Login"
+            onSuccess={responseSucess}
+            onFailure={responseFailure}
+            cookiePolicy={'single_host_origin'}
+            />
+        </div>
+      </div>
             
         </div>
     )

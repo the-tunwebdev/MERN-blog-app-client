@@ -7,16 +7,57 @@ function HomePage() {
     const token =  Cookies.get("token")
     const [posts,Setpost] =  useState([])
     const [loader,setloader] =  useState(false)
+    const [commentpost,setcommentpost] = useState([])
+    // const [text,settext] =  useState('')
 //----------------------------------------------
     const getPosts = async ()=>{
         try {
             const response = await fetch("http://localhost:5000/");
             const data = await response.json();
+            
             Setpost(data)
+            data.map((sigdata)=>{
+                setcommentpost(sigdata.comments)
+            })
             setloader(true)
 
         } catch (err) {
             console.error(err.message);
+        }
+    }
+    const addcomment = async (text,id)=>{
+        try{
+            await fetch('http://localhost:5000/comment',{
+                method:"PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    
+                    "Authorization": 'Bearer' + token
+                },
+                body:JSON.stringify({
+                    text,
+                    id
+                    
+            })
+        }).then(res=>res.json())
+        .then(result=>{
+            console.log(result)
+            const newData = posts.map(item=>{
+                if(item._id==result._id){
+                    return result
+                }else{
+                    return item
+                }
+             })
+            Setpost(newData)
+        
+            
+          
+        })
+        
+
+        }catch(err){
+            console.log(err)
         }
     }
     const AddToFav = async(title,imageURL,description,id) =>{
@@ -135,7 +176,10 @@ function HomePage() {
            
             {loader ?
                 posts.map((post)=>(
-                    <Post title={post.title} description={post.description} imageURL={post.imageURL} owner={post.owner} _id={post._id} likes={post.likes} likebtn={()=>likebtn(post._id)} unlikebtn={()=>unlikebtn(post._id)}  />
+                    <Post  comments={post.comments} addcomment={(e)=>{
+                        e.preventDefault()
+                        addcomment(e.target[0].value,post._id)
+                        e.target[0].value=''}}  title={post.title} description={post.description} imageURL={post.imageURL} owner={post.owner} _id={post._id} likes={post.likes} likebtn={()=>likebtn(post._id)} unlikebtn={()=>unlikebtn(post._id)}  />
                     
                 )) : 
                 <div className='lds-roller'></div>

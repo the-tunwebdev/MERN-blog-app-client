@@ -1,10 +1,10 @@
 import React,{useState,useEffect} from 'react'
 import * as Cookies from "js-cookie";
 
-function Post({title,imageURL,description,owner,isstrange,likes,_id,likebtn,unlikebtn}) {
+function Post({title,imageURL,description,owner,isstrange,likes,_id,likebtn,unlikebtn,text,settext,addcomment,comments,onchange}) {
     const [like,setlike] =  useState(false)
-    const [text,settext] =  useState('')
-    const [commentpost,setcommentpost] = useState([])
+    // const [text,settext] =  useState('')
+    // const [commentpost,setcommentpost] = useState([])
     
     
     const token =  Cookies.get("token")
@@ -14,50 +14,24 @@ function Post({title,imageURL,description,owner,isstrange,likes,_id,likebtn,unli
     const ViewMyPost = ()=>{
         window.location =  '/me'
     }
-    const getPosts = async ()=>{
-        try {
-            const response = await fetch("http://localhost:5000/");
-            const data = await response.json();
-            data.map((sigdata)=>{
-                setcommentpost(sigdata.comments)
-            })
+    // const getPosts = async ()=>{
+    //     try {
+    //         const response = await fetch("http://localhost:5000/");
+    //         const data = await response.json();
+            
             
 
-        } catch (err) {
-            console.error(err.message);
-        }
-    }
-    useEffect(()=>{
-        getPosts()
+    //     } catch (err) {
+    //         console.error(err.message);
+    //     }
+    // }
+    // useEffect(()=>{
+    //     getPosts()
 
 
-    },[])
+    // },[])
     const id =  Cookies.get("id")
-    const makeComment = async (text,id)=>{
-        try{
-            const response   = await fetch('http://localhost:5000/comment',{
-                method:"PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    
-                    "Authorization": 'Bearer' + token
-                },
-                body:JSON.stringify({
-                    text,
-                    id
-                    
-            })
-        })
-        const data = await response.json()
-        
-
-
-        setcommentpost(data.comments)
-
-        }catch(err){
-            console.log(err)
-        }
-    }
+    
     
     
     
@@ -88,31 +62,31 @@ function Post({title,imageURL,description,owner,isstrange,likes,_id,likebtn,unli
                                 
                                 
                             </div>
-                            {
-                                commentpost.map((comment)=>(
-                                    <div className="" style={{display : "flex"}}>
-                                        <h3 style={{marginLeft:"15px", marginRight : "30px" }}>{comment.postedBy} : </h3>
-                                        <p>{comment.text}</p>
-                                    </div>
-                                   
-                                ))
-                            }
                             
-                            
-                            <form className="w-full max-w-sm">
-                                <div className="flex items-center border-b border-teal-500 py-2">
-                                <input value={text} onChange={e => settext(e.target.value)} className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" placeholder="send comment" />
-                                
-                                <button onClick={(e)=>{
-                                    e.preventDefault()
-                                    makeComment(text,_id)}} className="flex-shrink-0 border-transparent border-4 text-teal-500 hover:text-teal-800 text-sm py-1 px-2 rounded" type="button">
-                                    send
-                                </button>
-                                </div>
-                            </form>
 
                             </div>
                         }
+                        {
+                            comments.map((comment)=>(
+                                <div className="" style={{display : "flex"}}>
+                                        <h3 style={{marginLeft:"15px", marginRight : "30px" }}>{comment.postedBy} : </h3>
+                                        <p>{comment.text}</p>
+                                </div>
+                            ))
+                        }
+                       
+                            
+                            
+                            
+                            <form className="w-full max-w-sm" onSubmit={addcomment} >
+                                <div className="flex items-center border-b border-teal-500 py-2">
+                                <input  className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" placeholder="send comment" />
+                                
+                                {/* <button onClick={addcomment} className="flex-shrink-0 border-transparent border-4 text-teal-500 hover:text-teal-800 text-sm py-1 px-2 rounded" type="button">
+                                    send
+                                </button> */}
+                                </div>
+                            </form>
                         
                         
                             
