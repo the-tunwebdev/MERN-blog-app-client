@@ -7,8 +7,16 @@
     z-index: 1  ;
 }
 .mycontainer{ 
-    height: 400px
+    height: 450px
 }
 .up{ 
     margin-top  : 20px
 }
+.vl {
+    border-left: 4px solid grey;
+    height: 50px;
+    
+    left: 50%;
+    margin-left: -3px;
+    top: 0;
+  }

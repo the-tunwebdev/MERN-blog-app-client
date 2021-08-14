@@ -4,6 +4,7 @@ import './style.css'
 import axios from 'axios';
 import * as Cookies from "js-cookie";
 function Register() {
+    const {REACT_APP_GOOGLE_ID} =  process.env
     // use State
     const [name,Setname] =  useState('')
     const [email,Setemail] =  useState('')
@@ -19,14 +20,23 @@ function Register() {
         })
         console.log('res ',res)
         const data  =  await res.json()
+        if(data.error){
+            document.getElementById('checkemail').style.color = 'red'
+            document.getElementById('checkemail').textContent =  'use another email (this email is registered)'
 
-        console.log('data' , data)
-        console.log(response)
-        Cookies.set("session", response.Ss.Me, { expires: 14 });
-        Cookies.set("id", data._id, { expires: 14 });
+        }else{
+            console.log('data' , data)
+            console.log(response)
+            Cookies.set("session", response.Ss.Me, { expires: 14 });
+            Cookies.set("id", data._id, { expires: 14 });
 
-        Cookies.set("token", data.token, { expires: 14 });
-        window.location = '/'       
+            Cookies.set("token", data.token, { expires: 14 });
+            window.location = '/'
+
+        }
+
+        
+            
         
         
 
@@ -99,10 +109,19 @@ function Register() {
                         <input value={password} onChange={e => Setpassword(e.target.value)} className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="password" type="password" placeholder="******************" />
                         <p className="text-red-500 text-xs italic">Please choose a password.</p>
                     </div>
-                    <div className="flex justify-center ">
+                    <div className="flex justify-center  space-x-6 ">
                         <button  onClick = {Addnewregister} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
                         Sign In
                         </button>
+                        <div class="vl"></div>
+                        <GoogleLogin
+            
+                            clientId={REACT_APP_GOOGLE_ID}
+                            buttonText="Login"
+                            onSuccess={responseSucess}
+                            onFailure={responseFailure}
+                            cookiePolicy={'single_host_origin'}
+                            />
                        
                     </div>
                 </div>
@@ -112,20 +131,6 @@ function Register() {
                 </p>
       </div>
       
-      <div class="flex flex-wrap justify-center">
-       
-        <div class="w-full sm:w-1/2 sm:pl-2">
-          
-          <GoogleLogin
-            
-            clientId=""
-            buttonText="Login"
-            onSuccess={responseSucess}
-            onFailure={responseFailure}
-            cookiePolicy={'single_host_origin'}
-            />
-        </div>
-      </div>
             
         </div>
     )

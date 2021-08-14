@@ -1,4 +1,4 @@
-import React,{useContext, useEffect,useState} from 'react'
+import React,{useContext, useEffect,useState,useRef} from 'react'
 import Post from './post/post'
 import './loader.css'
 import * as Cookies from "js-cookie";
@@ -8,6 +8,11 @@ function HomePage() {
     const [posts,Setpost] =  useState([])
     const [loader,setloader] =  useState(false)
     const [commentpost,setcommentpost] = useState([])
+    const messagesEndRef = useRef(null)
+
+    const scrollToBottom = () => {
+        messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
+    }
     // const [text,settext] =  useState('')
 //----------------------------------------------
     const getPosts = async ()=>{
@@ -41,7 +46,9 @@ function HomePage() {
             })
         }).then(res=>res.json())
         .then(result=>{
-            console.log(result)
+            if(result.error){
+                window.location = '/login'
+            }
             const newData = posts.map(item=>{
                 if(item._id==result._id){
                     return result
@@ -50,6 +57,7 @@ function HomePage() {
                 }
              })
             Setpost(newData)
+            scrollToBottom()
         
             
           
@@ -167,6 +175,7 @@ function HomePage() {
 }
     useEffect(()=>{
         getPosts()
+        
 
     },[])
     
@@ -176,10 +185,12 @@ function HomePage() {
            
             {loader ?
                 posts.map((post)=>(
-                    <Post  comments={post.comments} addcomment={(e)=>{
+                    <Post messagesEndRef={messagesEndRef} comments={post.comments} addcomment={(e)=>{
                         e.preventDefault()
                         addcomment(e.target[0].value,post._id)
-                        e.target[0].value=''}}  title={post.title} description={post.description} imageURL={post.imageURL} owner={post.owner} _id={post._id} likes={post.likes} likebtn={()=>likebtn(post._id)} unlikebtn={()=>unlikebtn(post._id)}  />
+                        
+                        e.target[0].value=''
+                        }}  title={post.title} description={post.description} imageURL={post.imageURL} owner={post.owner} _id={post._id} likes={post.likes} likebtn={()=>likebtn(post._id)} unlikebtn={()=>unlikebtn(post._id)}  />
                     
                 )) : 
                 <div className='lds-roller'></div>
